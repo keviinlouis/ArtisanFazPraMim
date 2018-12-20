@@ -44,10 +44,6 @@ class FazPraMimServiceProvider extends ServiceProvider
     {
         $this->app->register(\Reliese\Coders\CodersServiceProvider::class);
 
-        $this->app->extend(\Illuminate\Http\Request::class, function ($request) {
-            return new Request($request);
-        });
-
         $this->commands(
             CrudCommand::class
         );
