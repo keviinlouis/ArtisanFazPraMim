@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Louisk\\ArtisanFazPraMim": "src/"
+            "Louisk\\ArtisanFazPraMim\\": "src/"
         }
     },
     "extra": {

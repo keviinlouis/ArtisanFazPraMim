@@ -141,7 +141,6 @@ class CrudCommand extends Command
             $this->modelsHandler->runCodeModels();
             $this->info('Gerado models pelo banco');
         }catch (\Exception $e){
-            dd($e);
             $this->info('Configuração Base finalizada, execute o comando novamente');
             return;
         }
