@@ -6,7 +6,7 @@ namespace DumpNamespaceControllerApi;
 
 use DumpNamespaceResource\DumpModelResource;
 use DumpNamespaceService\DumpModelService;
-use App\Generator\BaseFiles\Requests\Request;
+use Louisk\ArtisanFazPraMim\Requests\Request;
 use App\Http\Controllers\Controller;
 
 class DumpModelController extends Controller
