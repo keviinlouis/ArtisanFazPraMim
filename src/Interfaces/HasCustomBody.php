@@ -6,7 +6,7 @@
  * Time: 19:34
  */
 
-namespace App\Generator\src\Interfaces;
+namespace Louisk\Generator\Interfaces;
 
 
 interface HasCustomBody

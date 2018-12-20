@@ -6,7 +6,7 @@
  * Time: 18:53
  */
 
-namespace App\Generator\src\Interfaces;
+namespace Louisk\Generator\Interfaces;
 
 
 interface HasStub

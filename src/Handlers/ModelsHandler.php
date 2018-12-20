@@ -6,10 +6,10 @@
  * Time: 17:54
  */
 
-namespace App\Generator\src\Handlers;
+namespace Louisk\Generator\Handlers;
 
 
-use App\Generator\src\Interfaces\HasBaseFile;
+use Louisk\Generator\Interfaces\HasBaseFile;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;

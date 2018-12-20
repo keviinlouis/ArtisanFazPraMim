@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Generator\src;
+namespace Louisk\Generator;
 
-use App\Generator\src\BaseFiles\Requests\Request;
-use App\Generator\Commands\CrudCommand;
+use Louisk\Generator\BaseFiles\Requests\Request;
+use Louisk\Generator\Commands\CrudCommand;
 use Illuminate\Support\ServiceProvider;
 
 class FazPraMimServiceProvider extends ServiceProvider

@@ -6,7 +6,7 @@
  * Time: 12:57
  */
 
-namespace App\Generator\src\BaseFiles\Requests;
+namespace Louisk\Generator\BaseFiles\Requests;
 
 
 use Illuminate\Http\Request as RequestBase;

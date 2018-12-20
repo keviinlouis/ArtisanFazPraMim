@@ -6,12 +6,12 @@
  * Time: 17:56
  */
 
-namespace App\Generator\src\Handlers;
+namespace Louisk\Generator\Handlers;
 
 
-use App\Generator\src\Interfaces\HasBaseFile;
-use App\Generator\src\Interfaces\HasCustomBody;
-use App\Generator\src\Interfaces\HasStub;
+use Louisk\Generator\Interfaces\HasBaseFile;
+use Louisk\Generator\Interfaces\HasCustomBody;
+use Louisk\Generator\Interfaces\HasStub;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class HandlerBase

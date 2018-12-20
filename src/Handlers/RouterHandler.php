@@ -6,7 +6,7 @@
  * Time: 18:52
  */
 
-namespace App\Generator\src\Handlers;
+namespace Louisk\Generator\Handlers;
 
 
 use Illuminate\Support\Str;

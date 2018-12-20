@@ -6,7 +6,7 @@
  * Time: 19:44
  */
 
-namespace App\Generator\src\Interfaces;
+namespace Louisk\Generator\Interfaces;
 
 
 interface HasBaseFile

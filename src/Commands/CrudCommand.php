@@ -1,20 +1,17 @@
 <?php
 
-namespace App\Generator\Commands;
+namespace Louisk\Generator\Commands;
 
-use App\Generator\src\Handlers\ApiControllerHandler;
-use App\Generator\src\Handlers\ExceptionsHandler;
-use App\Generator\src\Handlers\MiddlewaresHandler;
-use App\Generator\src\Handlers\ModelsHandler;
-use App\Generator\src\Handlers\ResourcesHandler;
-use App\Generator\src\Handlers\RouterHandler;
-use App\Generator\src\Handlers\RulesHandler;
-use App\Generator\src\Handlers\ServiceHandler;
-use App\Generator\src\Handlers\TraitsHandler;
-use ErrorException;
+use Louisk\Generator\Handlers\ApiControllerHandler;
+use Louisk\Generator\Handlers\ExceptionsHandler;
+use Louisk\Generator\Handlers\MiddlewaresHandler;
+use Louisk\Generator\Handlers\ModelsHandler;
+use Louisk\Generator\Handlers\ResourcesHandler;
+use Louisk\Generator\Handlers\RouterHandler;
+use Louisk\Generator\Handlers\RulesHandler;
+use Louisk\Generator\Handlers\ServiceHandler;
+use Louisk\Generator\Handlers\TraitsHandler;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Artisan;
 
 class CrudCommand extends Command
 {

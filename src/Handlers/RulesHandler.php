@@ -6,13 +6,11 @@
  * Time: 18:52
  */
 
-namespace App\Generator\src\Handlers;
+namespace Louisk\Generator\Handlers;
 
 
-use App\Generator\src\Interfaces\HasCustomBody;
-use App\Generator\src\Interfaces\HasStub;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
+use Louisk\Generator\Interfaces\HasCustomBody;
+use Louisk\Generator\Interfaces\HasStub;
 
 class RulesHandler extends HandlerBase implements HasStub, HasCustomBody
 {

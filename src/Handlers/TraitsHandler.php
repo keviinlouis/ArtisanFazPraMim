@@ -6,10 +6,10 @@
  * Time: 17:54
  */
 
-namespace App\Generator\src\Handlers;
+namespace Louisk\Generator\Handlers;
 
 
-use App\Generator\src\Interfaces\HasBaseFile;
+use Louisk\Generator\Interfaces\HasBaseFile;
 
 class TraitsHandler extends HandlerBase implements HasBaseFile
 {
