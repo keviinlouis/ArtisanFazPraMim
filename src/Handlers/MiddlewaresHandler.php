@@ -6,10 +6,10 @@
  * Time: 17:54
  */
 
-namespace Louisk\Generator\Handlers;
+namespace Louisk\ArtisanFazPraMim\Handlers;
 
 
-use Louisk\Generator\Interfaces\HasBaseFile;
+use Louisk\ArtisanFazPraMim\Interfaces\HasBaseFile;
 
 class MiddlewaresHandler extends HandlerBase implements HasBaseFile
 {

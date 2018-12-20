@@ -6,7 +6,7 @@
  * Time: 19:44
  */
 
-namespace Louisk\Generator\Interfaces;
+namespace Louisk\ArtisanFazPraMim\Interfaces;
 
 
 interface HasBaseFile

@@ -6,7 +6,7 @@
  * Time: 12:57
  */
 
-namespace Louisk\Generator\BaseFiles\Requests;
+namespace Louisk\ArtisanFazPraMim\BaseFiles\Requests;
 
 
 use Illuminate\Http\Request as RequestBase;

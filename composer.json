@@ -23,7 +23,7 @@
     "autoload": {
         "psr-4": {
             "Louisk\\Requests\\": "src/BaseFiles/Requests",
-            "Louisk\\": "src/"
+            "Louisk\\ArtisanFazPraMim": "src/"
         }
     }
 }

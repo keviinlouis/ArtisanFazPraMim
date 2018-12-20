@@ -6,12 +6,12 @@
  * Time: 18:52
  */
 
-namespace Louisk\Generator\Handlers;
+namespace Louisk\ArtisanFazPraMim\Handlers;
 
 
-use Louisk\Generator\Interfaces\HasBaseFile;
-use Louisk\Generator\Interfaces\HasCustomBody;
-use Louisk\Generator\Interfaces\HasStub;
+use Louisk\ArtisanFazPraMim\Interfaces\HasBaseFile;
+use Louisk\ArtisanFazPraMim\Interfaces\HasCustomBody;
+use Louisk\ArtisanFazPraMim\Interfaces\HasStub;
 use Illuminate\Support\Str;
 
 class ServiceHandler extends HandlerBase implements HasStub, HasBaseFile, HasCustomBody

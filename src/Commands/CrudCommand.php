@@ -1,16 +1,16 @@
 <?php
 
-namespace Louisk\Generator\Commands;
+namespace Louisk\ArtisanFazPraMim\Commands;
 
-use Louisk\Generator\Handlers\ApiControllerHandler;
-use Louisk\Generator\Handlers\ExceptionsHandler;
-use Louisk\Generator\Handlers\MiddlewaresHandler;
-use Louisk\Generator\Handlers\ModelsHandler;
-use Louisk\Generator\Handlers\ResourcesHandler;
-use Louisk\Generator\Handlers\RouterHandler;
-use Louisk\Generator\Handlers\RulesHandler;
-use Louisk\Generator\Handlers\ServiceHandler;
-use Louisk\Generator\Handlers\TraitsHandler;
+use Louisk\ArtisanFazPraMim\Handlers\ApiControllerHandler;
+use Louisk\ArtisanFazPraMim\Handlers\ExceptionsHandler;
+use Louisk\ArtisanFazPraMim\Handlers\MiddlewaresHandler;
+use Louisk\ArtisanFazPraMim\Handlers\ModelsHandler;
+use Louisk\ArtisanFazPraMim\Handlers\ResourcesHandler;
+use Louisk\ArtisanFazPraMim\Handlers\RouterHandler;
+use Louisk\ArtisanFazPraMim\Handlers\RulesHandler;
+use Louisk\ArtisanFazPraMim\Handlers\ServiceHandler;
+use Louisk\ArtisanFazPraMim\Handlers\TraitsHandler;
 use Illuminate\Console\Command;
 
 class CrudCommand extends Command

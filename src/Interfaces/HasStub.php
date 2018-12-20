@@ -6,7 +6,7 @@
  * Time: 18:53
  */
 
-namespace Louisk\Generator\Interfaces;
+namespace Louisk\ArtisanFazPraMim\Interfaces;
 
 
 interface HasStub

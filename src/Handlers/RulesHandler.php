@@ -6,11 +6,11 @@
  * Time: 18:52
  */
 
-namespace Louisk\Generator\Handlers;
+namespace Louisk\ArtisanFazPraMim\Handlers;
 
 
-use Louisk\Generator\Interfaces\HasCustomBody;
-use Louisk\Generator\Interfaces\HasStub;
+use Louisk\ArtisanFazPraMim\Interfaces\HasCustomBody;
+use Louisk\ArtisanFazPraMim\Interfaces\HasStub;
 
 class RulesHandler extends HandlerBase implements HasStub, HasCustomBody
 {

@@ -6,7 +6,7 @@
  * Time: 18:52
  */
 
-namespace Louisk\Generator\Handlers;
+namespace Louisk\ArtisanFazPraMim\Handlers;
 
 
 use Illuminate\Support\Str;

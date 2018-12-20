@@ -6,10 +6,10 @@
  * Time: 18:52
  */
 
-namespace Louisk\Generator\Handlers;
+namespace Louisk\ArtisanFazPraMim\Handlers;
 
 
-use Louisk\Generator\Interfaces\HasStub;
+use Louisk\ArtisanFazPraMim\Interfaces\HasStub;
 use Illuminate\Support\Str;
 
 class ApiControllerHandler extends HandlerBase implements HasStub

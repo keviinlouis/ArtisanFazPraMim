@@ -6,7 +6,7 @@
  * Time: 19:34
  */
 
-namespace Louisk\Generator\Interfaces;
+namespace Louisk\ArtisanFazPraMim\Interfaces;
 
 
 interface HasCustomBody
