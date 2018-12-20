@@ -1,0 +1,12 @@
+<?php
+
+\Illuminate\Support\Facades\Auth::routes();
+
+Route::group(['middleware' => 'auth:DumpAuth'], function() {
+
+    Route::get('me', 'DumpAuthUpperController@me');
+    Route::put('me', 'DumpAuthUpperController@update');
+
+{{routes}}
+
+});

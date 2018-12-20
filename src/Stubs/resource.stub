@@ -1,0 +1,24 @@
+<?php
+/**
+ * Criado através de FileTemplate por Kevin.
+ */
+namespace DumpNamespaceResource;
+
+use DumpNamespaceModels\DumpModel;
+
+class DumpModelResource extends BaseResource
+{
+    /**
+     * @param DumpModel $resource
+     * @return array
+     */
+    public function toResource($resource): array
+    {
+       $data = [
+            'id' => $resource->getKey(),
+{{data}}
+       ];
+
+       return $data;
+    }
+}

@@ -1,0 +1,166 @@
+<?php
+
+namespace DumpNamespaceService;
+
+use DumpNamespaceModels\DumpModel;
+use DumpNamespaceValidators\DumpModelRules;
+use Illuminate\Support\Collection;
+use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * Class DumpModelService
+ * @package App\Services
+ */
+class DumpModelService extends BaseService
+{
+    public $relations;
+
+    public $relationsCount;
+
+    /**
+     * DumpModelService constructor.
+     */
+    public function __construct()
+    {
+        $this->relations = [];
+        $this->relationsCount = [];
+    }
+
+
+    /**
+     * Listagem de DumpModel
+     * @param Collection $filters
+     * @return DumpModel[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @throws Exception
+     */
+    public function index(Collection $filters = null)
+    {
+        if(!$filters){
+            $filters = collect();
+        }
+
+        $query = DumpModel::with($this->relations);
+
+{{search_filter}}
+{{where_status}}
+        if ($beginDate = $filters->get('begin_date')) {
+           $query->where(function (Builder $builder) use ($beginDate) {
+               $builder->where('created_at', '<=', $beginDate);
+           });
+        }
+
+        if ($endDate = $filters->get('end_date')) {
+            $query->where(function (Builder $builder) use ($endDate) {
+               $builder->where('created_at', '>=', $endDate);
+            });
+        }
+
+         if ($date = $filters->get('end_date')) {
+            $query->where(function (Builder $builder) use ($date) {
+               $builder->where('created_at', '>=', $date);
+            });
+        }
+        $order = $filters->get('desc', false)
+                   ? 'desc'
+                   : $filters->get('order', 'asc');
+
+        $sortBy = $filters->get('sort', 'id');
+
+        $limit = $filters->get('limit', 15);
+
+        $query->orderBy($sortBy, $order);
+
+        return $limit > 0 ? $query->paginate($limit) : $query->get();
+    }
+
+    /**
+     * Visualizar DumpModel pelo id
+     * @param int|DumpModel $model
+     * @return DumpModel
+     * @throws ModelNotFoundException
+     */
+    public function show($model) : DumpModel
+    {
+        if(!$model instanceof DumpModel){
+            $model = DumpModel::whereId($model)->firstOrFail();
+        }
+
+        return $model->load($this->relations);
+    }
+
+    /**
+     * Criar DumpModel
+     * @param Collection $data
+     * @return DumpModel
+     * @throws Exception
+     */
+    public function store(Collection $data) : DumpModel
+    {
+        $this->validateWithArray($data->toArray(), DumpModelRules::store());
+
+        $model = DumpModel::create($data->all());
+
+        return $this->show($model);
+    }
+
+
+    /**
+     * Atualizar DumpModel
+     * @param Collection $data
+     * @param int|DumpModel $id
+     * @throws ModelNotFoundException
+     * @throws Exception
+     * @return DumpModel
+     */
+    public function update(Collection $data, $id) : DumpModel
+    {
+        $this->validateWithArray($data->toArray(), DumpModelRules::update());
+
+        $model = $this->show($id);
+
+        $model->update($data->all());
+
+        return $this->show($model);
+    }
+
+    /**
+     * Deletar DumpModel
+     * @param int|DumpModel $id
+     * @return DumpModel
+     * @throws ModelNotFoundException
+     * @throws Exception
+     */
+    public function delete($id) : DumpModel
+    {
+        $model = $this->show($id);
+
+        $model->delete();
+
+        return $model;
+    }
+
+    /**
+     * @param Collection $data
+     * @return DumpModel
+     * @throws Exception
+     * @throws \Throwable
+     */
+    public function login(Collection $data): DumpModel
+    {
+        $this->validateWithArray($data, DumpModelRules::login());
+
+        $model = DumpModel::whereEmail($data->get('email'))->first();
+
+        throw_if(
+            !$model->checkSenha($data->get('senha')),
+            \Exception::class,
+            'Senha inválida',
+            Response::HTTP_UNAUTHORIZED
+        );
+
+        return $model;
+    }
+
+}

@@ -1,0 +1,50 @@
+<?php
+/**
+ * Criado através de FileTemplate por Kevin.
+ */
+
+namespace DumpNamespaceValidators;
+
+use DumpNamespaceModels\DumpModel;
+use Illuminate\Validation\Rule;
+
+
+/**
+ * Class DumpModel
+ * @package DumpNamespaceValidators
+ */
+class DumpModelRules
+{
+    /**
+     * @return array
+     */
+    static public function login(): array
+    {
+        return [
+            'email' => 'required|string|exists:'.(new DumpModel)->getTable(),
+            'senha' => 'required|string',
+        ];
+    }
+
+    /**
+     * Regras para criação de DumpModel
+     * @return array
+     */
+    static public function store() : array
+    {
+        return [
+{{store}}
+        ];
+    }
+
+    /**
+     * Regras para alteração de DumpModel
+     * @return array
+     */
+    static public function update() : array
+    {
+        return [
+{{update}}
+        ];
+    }
+}

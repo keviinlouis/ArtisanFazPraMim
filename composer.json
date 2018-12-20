@@ -1,0 +1,29 @@
+{
+    "name": "keviinlouis/artisan-faz-pra-mim",
+    "license": "MIT",
+    "description": "Laravel 5 Generator",
+    "keywords": [
+        "laravel",
+        "crud",
+        "crud generator",
+        "laravel crud generator",
+        "admin lte"
+    ],
+    "authors": [
+        {
+            "name": "Kevin Louis",
+            "email": "keviinlouiis@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.*",
+        "illuminate/support": "~5.1",
+        "reliese/laravel": "^0.0.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "Louisk\\Requests\\": "src/BaseFiles/Requests",
+            "Louisk\\": "src/"
+        }
+    }
+}

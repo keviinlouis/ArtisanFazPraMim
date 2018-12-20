@@ -1,0 +1,121 @@
+<?php
+/**
+ * Criado através de Generator por Kevin.
+ */
+namespace DumpNamespaceControllerApi;
+
+use DumpNamespaceResource\DumpModelResource;
+use DumpNamespaceService\DumpModelService;
+use App\Generator\BaseFiles\Requests\Request;
+use App\Http\Controllers\Controller;
+
+class DumpModelController extends Controller
+{
+    private $DumpLowerModelService;
+
+    /**
+     * DumpModelController constructor.
+     * @param DumpModelService $DumpLowerModelService
+     */
+    public function __construct(DumpModelService $DumpLowerModelService)
+    {
+        $this->DumpLowerModelService = $DumpLowerModelService;
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return DumpModelResource
+     * @throws \Exception
+     */
+    public function index(Request $request) : DumpModelResource
+    {
+
+        $model = $this->DumpLowerModelService->index($request->toCollection());
+
+        return DumpModelResource::makeResource($model);
+
+    }
+
+    /** Login Method
+     * @param Request $request
+     * @return DumpModelResource
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function login(Request $request): DumpModelResource
+    {
+        $model = $this->DumpLowerModelService->login($request->toCollection());
+
+        return DumpModelResource::makeResource($model)->withToken();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return DumpModelResource
+     */
+    public function me(): DumpModelResource
+    {
+        $model = $this->DumpLowerModelService->show(auth()->id());
+
+        return DumpModelResource::makeResource($model);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @return DumpModelResource
+     * @throws \Exception
+     * @throws \Throwable
+     */
+    public function store(Request $request) : DumpModelResource
+    {
+        $model = $this->DumpLowerModelService->store($request->toCollection());
+
+        return DumpModelResource::makeResource($model)->withToken();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return DumpModelResource
+     */
+    public function show(int $id) : DumpModelResource
+    {
+        $model = $this->DumpLowerModelService->show($id);
+
+        return DumpModelResource::makeResource($model);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param Request $request
+     * @return DumpModelResource
+     * @throws \Exception
+     */
+    public function update(Request $request) : DumpModelResource
+    {
+        $model = $this->DumpLowerModelService->update($request->toCollection(), auth()->id());
+
+        return DumpModelResource::makeResource($model);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return DumpModelResource
+     * @throws \Exception
+     */
+    public function destroy() : DumpModelResource
+    {
+        $model = $this->DumpLowerModelService->delete(auth()->id());
+
+        return DumpModelResource::makeResource($model);
+    }
+}

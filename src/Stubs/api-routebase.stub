@@ -1,0 +1,13 @@
+<?php
+
+Route::post('DumpAuth/login', 'DumpUpperAuthController@login');
+Route::post('DumpAuth', 'DumpUpperAuthController@store');
+
+Route::group(['middleware' => 'jwt:api_DumpAuth'], function() {
+
+    Route::get('me', 'DumpUpperAuthController@me');
+    Route::put('me', 'DumpUpperAuthController@update');
+
+{{routes}}
+
+});
