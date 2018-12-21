@@ -1,7 +1,7 @@
 <?php
 
-Route::post('DumpAuth/login', 'DumpUpperAuthController@login');
-Route::post('DumpAuth', 'DumpUpperAuthController@store');
+Route::post('login', 'DumpUpperAuthController@login');
+Route::post('register', 'DumpUpperAuthController@store');
 
 Route::group(['middleware' => 'jwt:api_DumpAuth'], function() {
 
