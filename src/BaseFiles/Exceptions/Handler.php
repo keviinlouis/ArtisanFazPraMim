@@ -187,6 +187,6 @@ class Handler extends ExceptionHandler
             'errors' => $validator->validator->errors(),
         ];
 
-        return response()->json($response, Response::HTTP_UNPROCESSABLE_ENTITY;
+        return response()->json($response, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }
