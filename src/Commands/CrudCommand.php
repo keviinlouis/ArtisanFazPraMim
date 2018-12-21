@@ -246,6 +246,9 @@ class CrudCommand extends Command
             if(!$this->checkInComposer('barryvdh/laravel-cors')) {
                 $require[] = 'barryvdh/laravel-cors';
             }
+            if(!$this->checkInComposer('barryvdh/laravel-ide-helper')) {
+                $require[] = 'barryvdh/laravel-ide-helper';
+            }
 
             $this->info('Copiando Middlewares');
 
@@ -289,6 +292,8 @@ class CrudCommand extends Command
         }
 
         $this->composerRequire($require);
+        
+        exec('php artisan ide-helper:generate');
     }
 
     public function checkInComposer($package)

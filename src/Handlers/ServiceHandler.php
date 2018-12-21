@@ -13,6 +13,7 @@ use Louisk\ArtisanFazPraMim\Interfaces\HasBaseFile;
 use Louisk\ArtisanFazPraMim\Interfaces\HasCustomBody;
 use Louisk\ArtisanFazPraMim\Interfaces\HasStub;
 use Illuminate\Support\Str;
+use Reliese\Coders\Model\Relations\BelongsTo;
 
 class ServiceHandler extends HandlerBase implements HasStub, HasBaseFile, HasCustomBody
 {
@@ -69,9 +70,7 @@ class ServiceHandler extends HandlerBase implements HasStub, HasBaseFile, HasCus
 
         $fillable = $instanceModel->getFillable();
 
-        if($instanceModel->getRelations()){
-            dd($instanceModel->getRelations());
-        }
+        $str = $this->buildRelations($instanceModel, $fillable, $str);
 
         $searchFilter = '{{search_filter}}';
 
@@ -125,5 +124,42 @@ class ServiceHandler extends HandlerBase implements HasStub, HasBaseFile, HasCus
         ];
 
         return str_replace('{{where_status}}', implode(PHP_EOL, $whereStatusCode), $str);
+    }
+
+    private function buildRelations($instanceModel, array $fillable, $str)
+    {
+        $relations = array_filter($fillable, function($item){
+            return str_contains($item, '_id');
+         });
+
+        if(!$relations){
+            $str = str_replace('{{relations_store}}', '', $str);
+            $str = str_replace('{{relations_update}}', '', $str);
+
+            return $str;
+        }
+        $relationsStoreCode = [];
+
+        $relationsUpdateCode = [];
+
+        foreach($relations as $relation){
+            $relation = str_replace('_id', '', $relation);
+            $relationCamel = Str::camel($relation);
+            
+            if($instanceModel->$relationCamel() instanceof BelongsTo){
+                continue;
+            }
+
+            $relationsStoreCode[] = '        $model->'.$relationCamel.'()->create($data->get(\''.$relation.'\'));';
+
+            $relationsUpdateCode[] = '        if($'.$relationCamel.' = $data->get(\''.$relation.'\')){';
+            $relationsUpdateCode[] = '              $model->'.$relationCamel.'->update($data->get(\''.$relation.'\'));';
+            $relationsUpdateCode[] = '        }';
+        }
+
+        $str = str_replace('{{relations_store}}', implode(PHP_EOL, $relationsStoreCode), $str);
+        $str = str_replace('{{relations_update}}', implode(PHP_EOL, $relationsUpdateCode), $str);
+
+        return $str;
     }
 }

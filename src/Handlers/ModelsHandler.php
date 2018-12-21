@@ -83,6 +83,8 @@ class ModelsHandler extends HandlerBase implements HasBaseFile
 
         $factory->on($connection)->map($schema);
 
+        exec('php artisan ide-helper:models -W');
+
         return $this;
     }
 

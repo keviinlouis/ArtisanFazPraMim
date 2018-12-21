@@ -103,6 +103,8 @@ class DumpModelService extends BaseService
 
         $model = DumpModel::create($data->all());
 
+{{relations_store}}
+
         return $this->show($model);
     }
 
@@ -122,6 +124,8 @@ class DumpModelService extends BaseService
         $model = $this->show($id);
 
         $model->update($data->all());
+
+{{relations_update}}
 
         return $this->show($model);
     }
