@@ -291,8 +291,14 @@ class CrudCommand extends Command
             ]);
         }
 
+        if($this->apiControllerHandler->config['lang'] == 'pt_br'){
+             if(!$this->checkInComposer('laravellegends/pt-br-validator')) {
+                 $require[] = 'laravellegends/pt-br-validator';
+             }
+        }
+
         $this->composerRequire($require);
-        
+
         exec('php artisan ide-helper:generate');
     }
 

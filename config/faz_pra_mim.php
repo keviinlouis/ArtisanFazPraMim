@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'lang' => 'pt_br',
 
     'custom_template' => false,
 
@@ -99,6 +100,14 @@ return [
         'category',
         'type',
         'subcategory',
+    ],
+
+    'not_required_fields' => [
+        'ip_when_accepted_terms',
+        'email_verified_at',
+        'device_model',
+        'device_token',
+        'average_ratings'
     ],
 
 

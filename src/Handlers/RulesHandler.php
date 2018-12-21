@@ -64,8 +64,18 @@ class RulesHandler extends HandlerBase implements HasStub, HasCustomBody
         $updateRules = [];
 
         foreach($fillable as $field){
-            $storeRules[] = '            \''.$field.'\' => \'required\',';
-            $updateRules[] = '            \''.$field.'\' => \'nullable\',';
+            if(in_array($this->config['not_required_fields'], $field) !== false){
+                continue;
+            }
+
+            if($field == 'password'){
+                $storeRules[] = '            \'password\' => \'required|confirmed|min:6\',';
+                $updateRules[] = '            \'new_password\' => \'required_with:new_password|min:6\',';
+                $updateRules[] = '            \'old_password\' => \'required_with:old_password|min:6\',';
+            }else{
+                $storeRules[] = '            \''.$field.'\' => \'required\',';
+                $updateRules[] = '            \''.$field.'\' => \'nullable\',';
+            }
         }
 
         $str = str_replace('{{store}}', implode(PHP_EOL, $storeRules), $str);
