@@ -10,7 +10,7 @@
 
 Tenha certeza que seu banco está modelado, de preferencia em ingles, e seu ``.env`` está configurado corretamente <br>
 
-Rode o comando
+Rode o comando <br>
 ``composer require louisk/artisan-faz-pra-mim``
 
 Se o seu projeto for Laravel menor que v5.5, registre em ``config/app.php``
@@ -22,10 +22,10 @@ Se o seu projeto for Laravel menor que v5.5, registre em ``config/app.php``
 ````` 
 
 Rode o comando para configurar seu projeto, como pastas e quais features você quer, o comando irá gerar o ``config/faz-pra-mim.php``<br>
-Caso queira o projeto default, não precisa configurar
+Caso queira o projeto default, não precisa configurar<br>
 ``php artisan vendor:publish --tag=faz-pra-mim``
 
-Rode o comando para gerar seu projeto
+Rode o comando para gerar seu projeto <br>
 ``php artisan faz-pra-mim``
 
 Pronto! 
