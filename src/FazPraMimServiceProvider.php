@@ -24,7 +24,7 @@ class FazPraMimServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/faz_pra_mim.php' => config_path('faz_pra_mim.php'),
-        ]);
+        ], 'faz-pra-mim');
 
         $this->publishes([
             __DIR__ . '/../publish/app.blade.php' => base_path('resources/views/layouts/app.blade.php'),

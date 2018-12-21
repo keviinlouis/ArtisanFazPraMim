@@ -1,12 +1,34 @@
 # Artisan Faz Pra mim
 
-#### TODOS 
+## TODOS 
 - Atrelar relations no store e no update
 - Corrigir os Bugs encontrados
 - Copiar Classe Request
 - Analisar se vale a pena deixar o base files na vendor
-- Escrever README.md
 
+## Como Usar
+
+Tenha certeza que seu banco está modelado, de preferencia em ingles, e seu ``.env`` está configurado corretamente <br>
+
+Rode o comando
+``composer require louisk/artisan-faz-pra-mim``
+
+Se o seu projeto for Laravel menor que v5.5, registre em ``config/app.php``
+````` 
+   /*
+   * Package Service Providers...
+   */
+  Louisk\ArtisanFazPraMim\FazPraMimServiceProvider::class,
+````` 
+
+Rode o comando para configurar seu projeto, como pastas e quais features você quer, o comando irá gerar o ``config/faz-pra-mim.php``<br>
+Caso queira o projeto default, não precisa configurar
+``php artisan vendor:publish --tag=faz-pra-mim``
+
+Rode o comando para gerar seu projeto
+``php artisan faz-pra-mim``
+
+Pronto! 
 
 ## Estrutura Projeto Artisan Faz Pra Mim
 
