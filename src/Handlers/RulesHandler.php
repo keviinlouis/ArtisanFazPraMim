@@ -72,6 +72,12 @@ class RulesHandler extends HandlerBase implements HasStub, HasCustomBody
                 $storeRules[] = '            \'password\' => \'required|confirmed|min:6\',';
                 $updateRules[] = '            \'new_password\' => \'required_with:new_password|min:6\',';
                 $updateRules[] = '            \'old_password\' => \'required_with:old_password|min:6\',';
+            }else if($field == 'cpf' && $this->config['lang'] == 'pt_br'){
+                $storeRules[] = '            \'cpf\' => \'required|cpf\',';
+                $updateRules[] = '            \'cpf\' => \'nullable|cpf\',';
+            }else if($field == 'cnpj' && $this->config['lang'] == 'pt_br'){
+                $storeRules[] = '            \'cnpj\' => \'required|cnpj\',';
+                $updateRules[] = '            \'cnpj\' => \'nullable|cnpj\',';
             }else{
                 $storeRules[] = '            \''.$field.'\' => \'required\',';
                 $updateRules[] = '            \''.$field.'\' => \'nullable\',';
