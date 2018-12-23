@@ -146,6 +146,10 @@ class ServiceHandler extends HandlerBase implements HasStub, HasBaseFile, HasCus
             $relation = str_replace('_id', '', $relation);
             $relationCamel = Str::camel($relation);
             
+            if(in_array($relation.'_type', $fillable) !== false){
+                continue;
+            }
+            
             if($instanceModel->$relationCamel() instanceof BelongsTo){
                 continue;
             }
