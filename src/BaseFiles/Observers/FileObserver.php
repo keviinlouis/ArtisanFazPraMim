@@ -24,7 +24,7 @@ class FileObserver extends Observer
         $this->fileService = new FileService();
     }
 
-    protected $tiposRemoviveisAoRemoverDoBanco = [
+    protected $typesRemovable = [
         // TODO Preencher Tipo de files que irão ser removidas ao remover o file do banco
     ];
 
@@ -38,7 +38,7 @@ class FileObserver extends Observer
      */
     public function creating(File $file)
     {
-        if(!$this->checkIfIsFile($file->nome)){
+        if(!$this->checkIfIsFile($file->name)){
             return;
         }
         $this->copyFile($file);
@@ -47,9 +47,9 @@ class FileObserver extends Observer
     public function created(File $file)
     {
         $this->fileService->removeFromTmp(
-            $file->nome
+            $file->name
         );
-        if (in_array($file->tipo, $this->tiposComThumb) !== false) {
+        if (in_array($file->tipo, $this->typeWithThumb) !== false) {
             $this->makeThumb($file);
         }
     }
@@ -60,7 +60,7 @@ class FileObserver extends Observer
      */
     public function updating(File $file)
     {
-        if($this->isNotEqual('nome', $file)){
+        if($this->isNotEqual('name', $file)){
             $this->copyFile($file);
         }
     }
@@ -69,7 +69,7 @@ class FileObserver extends Observer
     {
         $this->makeThumb($file);
         $this->fileService->removeFromTmp(
-            $file->nome
+            $file->name
         );
     }
 
@@ -78,15 +78,15 @@ class FileObserver extends Observer
      */
     public function deleted(File $file)
     {
-        if (in_array($file->tipo, $this->tiposRemoviveisAoRemoverDoBanco) !== false) {
+        if (in_array($file->tipo, $this->typesRemovable) !== false) {
             $file->removeFile();
             $file->removeThumb();
         }
     }
 
-    public function checkIfIsFile($nome)
+    public function checkIfIsFile($name)
     {
-        return strpos($nome, '.') !== true;
+        return strpos($name, '.') !== true;
     }
 
     /**
@@ -98,25 +98,25 @@ class FileObserver extends Observer
     public function copyFile(File &$file)
     {
         $toPath = explode('/', $file->path);
-        if($toPath[count($toPath)-1] == $file->nome){
+        if($toPath[count($toPath)-1] == $file->name){
             unset($toPath[count($toPath)-1]);
         }
         $toPath = implode('/', $toPath);
 
         $path = $this->fileService->copyFileFromTmp(
-            $file->nome,
+            $file->name,
             $toPath
         );
 
         $file->path = $path;
         $file->url = $this->fileService->url($file->path);
-        $file->extensao = $this->fileService->extractExtensionFromFileName($file->nome);
+        $file->extension = $this->fileService->extractExtensionFromFileName($file->name);
     }
 
     public function makeThumb(File $file)
     {
         if($file->isImage()){
-            $this->fileService->resizeImage(File::THUMB_WIDTH, File::THUMB_HEIGHT, $file->path, $file->nome_thumb);
+            $this->fileService->resizeImage(File::THUMB_WIDTH, File::THUMB_HEIGHT, $file->path, $file->name_thumb);
         }
     }
 

@@ -30,7 +30,7 @@ class DumpModelService extends BaseService
 
 
     /**
-     * Listagem de DumpModel
+     * List DumpModel
      * @param Collection $filters
      * @return DumpModel[]|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      * @throws Exception
@@ -77,7 +77,7 @@ class DumpModelService extends BaseService
     }
 
     /**
-     * Visualizar DumpModel pelo id
+     * Show DumpModel pelo id
      * @param int|DumpModel $model
      * @return DumpModel
      * @throws ModelNotFoundException
@@ -92,7 +92,7 @@ class DumpModelService extends BaseService
     }
 
     /**
-     * Criar DumpModel
+     * Create DumpModel
      * @param Collection $data
      * @return DumpModel
      * @throws Exception
@@ -110,7 +110,7 @@ class DumpModelService extends BaseService
 
 
     /**
-     * Atualizar DumpModel
+     * Update DumpModel
      * @param Collection $data
      * @param int|DumpModel $id
      * @throws ModelNotFoundException
@@ -131,7 +131,7 @@ class DumpModelService extends BaseService
     }
 
     /**
-     * Deletar DumpModel
+     * Remove DumpModel
      * @param int|DumpModel $id
      * @return DumpModel
      * @throws ModelNotFoundException
