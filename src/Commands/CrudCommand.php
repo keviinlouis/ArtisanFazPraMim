@@ -2,6 +2,7 @@
 
 namespace Louisk\ArtisanFazPraMim\Commands;
 
+use Illuminate\Console\Command;
 use Louisk\ArtisanFazPraMim\Handlers\ApiControllerHandler;
 use Louisk\ArtisanFazPraMim\Handlers\ExceptionsHandler;
 use Louisk\ArtisanFazPraMim\Handlers\MiddlewaresHandler;
@@ -12,7 +13,6 @@ use Louisk\ArtisanFazPraMim\Handlers\RouterHandler;
 use Louisk\ArtisanFazPraMim\Handlers\RulesHandler;
 use Louisk\ArtisanFazPraMim\Handlers\ServiceHandler;
 use Louisk\ArtisanFazPraMim\Handlers\TraitsHandler;
-use Illuminate\Console\Command;
 
 class CrudCommand extends Command
 {
@@ -145,10 +145,10 @@ class CrudCommand extends Command
 
         $this->handleBaseFiles();
 
-        try{
+        try {
             $this->modelsHandler->runCodeModels();
             $this->info('Gerado models pelo banco');
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $this->info('Configuração Base finalizada, execute o comando novamente');
             return;
         }
@@ -167,6 +167,8 @@ class CrudCommand extends Command
             $this->info('Configurar CORS: https://github.com/barryvdh/laravel-cors');
             $this->info('Configurar JWT: https://github.com/tymondesigns/jwt-auth');
         }
+
+        $this->handleTransalation();
 
         return;
     }
@@ -238,7 +240,7 @@ class CrudCommand extends Command
 
         }
 
-        if($this->hasWeb){
+        if($this->hasWeb) {
             $this->info('Fazendo Controllers');
         }
 
@@ -303,10 +305,10 @@ class CrudCommand extends Command
             ]);
         }
 
-        if($this->apiControllerHandler->config['lang'] == 'pt_br'){
-             if(!$this->checkInComposer('laravellegends/pt-br-validator')) {
-                 $require[] = 'laravellegends/pt-br-validator';
-             }
+        if($this->apiControllerHandler->config['lang'] == 'pt_br') {
+            if(!$this->checkInComposer('laravellegends/pt-br-validator')) {
+                $require[] = 'laravellegends/pt-br-validator';
+            }
         }
 
         $this->composerRequire($require);
@@ -338,15 +340,15 @@ class CrudCommand extends Command
 
     private function addEnvKeys(array $keys)
     {
-        $envPath = base_path().'/.env';
+        $envPath = base_path() . '/.env';
         $envStr = file_get_contents($envPath);
 
         $envStr .= PHP_EOL;
 
-        foreach($keys as $key => $value){
-            if(!$this->hasInEnv($key)){
+        foreach ($keys as $key => $value) {
+            if(!$this->hasInEnv($key)) {
 
-                $envStr .= PHP_EOL.$key.'='.trim($value);
+                $envStr .= PHP_EOL . $key . '=' . trim($value);
             }
         }
 
@@ -355,17 +357,28 @@ class CrudCommand extends Command
 
     private function hasInEnv($key)
     {
-        $envPath = base_path().'/.env';
+        $envPath = base_path() . '/.env';
         $env = file($envPath);
 
-        foreach($env as $line){
+        foreach ($env as $line) {
             list($keyOnEnv) = explode('=', $line);
 
-            if(strpos($key, $keyOnEnv) !== false){
+            if(strpos($key, $keyOnEnv) !== false) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    private function handleTransalation()
+    {
+        if($this->apiControllerHandler->config['lang'] == 'pt_br'){
+            exec('cp -R '.__DIR__ .'/../Translation/pt_br '.resource_path('lang'));
+            
+            $strConfig = file_get_contents(config_path('app.php'));
+            
+            file_put_contents(config_path('app.php'), str_replace('\'locale\' => \'en\',', '\'locale\' => \'pt_br\',', $strConfig));
+        }
     }
 }
