@@ -66,6 +66,11 @@ return [
         'path' => app_path('Validators'),
     ],
 
+    'observers' => [
+        'namespace' => 'App\Observers',
+        'path' => app_path('Observers'),
+    ],
+
     'routes' => [
         'path' => app_path('../routes'),
     ],
