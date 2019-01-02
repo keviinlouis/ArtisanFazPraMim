@@ -69,12 +69,12 @@ class ObserversHandler extends HandlerBase implements HasBaseFile
         ];
 
         if(!$this->config['with_address_model']) {
-            $observers[] = 'Address::observe(AddressObserver::class);';
+            $observers[] = '        Address::observe(AddressObserver::class);';
             $uses[] = 'use '.$this->config['models']['namespace'].'\Address;';
         }
 
         if(!$this->config['with_file_model']) {
-            $observers[] = 'File::observe(FileObserver::class);';
+            $observers[] = '        File::observe(FileObserver::class);';
             $uses[] = 'use '.$this->config['models']['namespace'].'\File;';
         }
 

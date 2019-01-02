@@ -27,4 +27,35 @@ class MiddlewaresHandler extends HandlerBase implements HasBaseFile
     {
         return 'Middlewares';
     }
+
+    public function copyBaseFiles(): HandlerBase
+    {
+        parent::copyBaseFiles();
+
+        $this->registerMiddleware();
+    }
+
+    private function registerMiddleware()
+    {
+        $break = 'protected $routeMiddleware = [';
+
+        $path = app_path('Http/Kernel.php');
+
+        $middlewares = [
+            $break
+        ];
+
+        if($this->config['has_api']){
+            $middlewares[] = '        \'jwt\' => CheckToken::class,';
+        }
+
+        $strFile = file_get_contents($path);
+
+        $strFile = str_replace($break, implode(PHP_EOL, $middlewares), $strFile);
+
+        file_put_contents($path, $strFile);
+
+
+
+    }
 }
