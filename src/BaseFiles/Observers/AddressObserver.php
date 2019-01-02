@@ -6,7 +6,7 @@
  * Time: 22:51
  */
 
-namespace App\Observers;
+namespace DumpNamespace;
 
 
 use App\Models\Address;

@@ -6,6 +6,7 @@ use Louisk\ArtisanFazPraMim\Handlers\ApiControllerHandler;
 use Louisk\ArtisanFazPraMim\Handlers\ExceptionsHandler;
 use Louisk\ArtisanFazPraMim\Handlers\MiddlewaresHandler;
 use Louisk\ArtisanFazPraMim\Handlers\ModelsHandler;
+use Louisk\ArtisanFazPraMim\Handlers\ObserversHandler;
 use Louisk\ArtisanFazPraMim\Handlers\ResourcesHandler;
 use Louisk\ArtisanFazPraMim\Handlers\RouterHandler;
 use Louisk\ArtisanFazPraMim\Handlers\RulesHandler;
@@ -40,6 +41,10 @@ class CrudCommand extends Command
      * @var ExceptionsHandler
      */
     protected $exceptionsHandler;
+    /**
+     * @var ObserversHandler
+     */
+    protected $observersHandler;
 
     private $hasApi;
 
@@ -92,6 +97,7 @@ class CrudCommand extends Command
      * @param MiddlewaresHandler $middlewaresHandler
      * @param ExceptionsHandler $exceptionsHandler
      * @param RouterHandler $routerHandler
+     * @param ObserversHandler $observersHandler
      */
     public function __construct(
         TraitsHandler $traitsHandler,
@@ -102,7 +108,8 @@ class CrudCommand extends Command
         ResourcesHandler $resourcesHandler,
         MiddlewaresHandler $middlewaresHandler,
         ExceptionsHandler $exceptionsHandler,
-        RouterHandler $routerHandler
+        RouterHandler $routerHandler,
+        ObserversHandler $observersHandler
     ) {
         parent::__construct();
 
@@ -124,6 +131,7 @@ class CrudCommand extends Command
         $this->hasAddress = $this->resourcesHandler->config['with_address_model'];
         $this->hasFile = $this->resourcesHandler->config['with_file_model'];
 
+        $this->observersHandler = $observersHandler;
     }
 
     /**

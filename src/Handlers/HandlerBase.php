@@ -44,7 +44,6 @@ abstract class HandlerBase
 
     public function makeStubs(): void
     {
-
         foreach ($this->getModelFiles(false) as $file) {
             $this->makeStub($file);
         }

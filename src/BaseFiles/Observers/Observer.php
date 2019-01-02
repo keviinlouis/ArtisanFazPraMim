@@ -6,7 +6,7 @@
  * Time: 22:23
  */
 
-namespace App\Observers;
+namespace DumpNamespace;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -18,17 +18,6 @@ return [
     'with_push' => true,
 
     /*
-    |--------------------------------------------------------------------------
-    | Crud Generator Template Stubs Storage Path
-    |--------------------------------------------------------------------------
-    |
-    | Here you can specify your custom template path for the generator.
-    |
-     */
-
-    'path' => base_path('resources/crud_generator_admin_lte/'),
-
-    /*
    |--------------------------------------------------------------------------
    | User Auth
    |--------------------------------------------------------------------------
@@ -66,7 +55,6 @@ return [
         'namespace' => 'App\Http\Controllers\Api',
         'path' => app_path('Http/Controllers/Api'),
     ],
-
 
     'controllers' => [
         'namespace' => 'App\Http\Controllers',

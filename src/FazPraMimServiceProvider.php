@@ -2,7 +2,6 @@
 
 namespace Louisk\ArtisanFazPraMim;
 
-use Louisk\ArtisanFazPraMim\BaseFiles\Requests\Request;
 use Louisk\ArtisanFazPraMim\Commands\CrudCommand;
 use Illuminate\Support\ServiceProvider;
 

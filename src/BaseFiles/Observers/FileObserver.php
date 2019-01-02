@@ -6,7 +6,7 @@
  * Time: 18:45
  */
 
-namespace App\Observers;
+namespace DumpNamespace;
 
 use App\Entities\File;
 use App\Entities\Cliente;
