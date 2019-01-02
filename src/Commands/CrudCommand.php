@@ -189,6 +189,10 @@ class CrudCommand extends Command
 
         $this->exceptionsHandler->copyBaseFiles();
 
+        $this->info('Copiando Observers');
+
+        $this->observersHandler->copyBaseFiles();
+
         if($this->hasApi) {
             $this->info('Copiando Base Resources');
 
