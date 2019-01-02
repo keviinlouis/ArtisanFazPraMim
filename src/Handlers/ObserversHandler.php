@@ -43,11 +43,13 @@ class ObserversHandler extends HandlerBase implements HasBaseFile
         return $files;
     }
 
-    public function makeStubs(): void
+    public function copyBaseFiles(): HandlerBase
     {
-        parent::makeStubs();
+        parent::copyBaseFiles();
 
         $this->registerObservers();
+        
+        return $this;
     }
 
     private function registerObservers()
@@ -68,19 +70,21 @@ class ObserversHandler extends HandlerBase implements HasBaseFile
             $useStrBreaker
         ];
 
-        if(!$this->config['with_address_model']) {
+        if($this->config['with_address_model']) {
             $observers[] = '        Address::observe(AddressObserver::class);';
             $uses[] = 'use '.$this->config['models']['namespace'].'\Address;';
+            $uses[] = 'use '.$this->config['observers']['namespace'].'\AddressObserver;';
         }
 
-        if(!$this->config['with_file_model']) {
+        if($this->config['with_file_model']) {
             $observers[] = '        File::observe(FileObserver::class);';
             $uses[] = 'use '.$this->config['models']['namespace'].'\File;';
+            $uses[] = 'use '.$this->config['observers']['namespace'].'\FileObserver;';
         }
 
         $subStr = str_replace($useStrBreaker, implode(PHP_EOL, $uses), $subStr);
         $subStr = str_replace($registerStrBreaker, implode(PHP_EOL, $observers), $subStr);
-
+        
         file_put_contents($path, $subStr);
     }
 

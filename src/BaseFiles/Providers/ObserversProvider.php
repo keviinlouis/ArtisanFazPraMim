@@ -2,7 +2,6 @@
 
 namespace DumpNamespace;
 
-use App\Models\File;
 use Illuminate\Support\ServiceProvider;
 
 class ObserversProvider extends ServiceProvider
@@ -15,7 +14,6 @@ class ObserversProvider extends ServiceProvider
     public function boot()
     {
        // TODO
-        File::observe(FileObserver::class);
     }
 
     /**
