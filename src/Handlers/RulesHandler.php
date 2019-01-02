@@ -64,7 +64,7 @@ class RulesHandler extends HandlerBase implements HasStub, HasCustomBody
         $updateRules = [];
 
         foreach($fillable as $field){
-            if(in_array($this->config['not_required_fields'], $field) !== false){
+            if(in_array($field, $this->config['not_required_fields']) !== false){
                 continue;
             }
 
