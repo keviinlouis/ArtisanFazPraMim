@@ -48,7 +48,9 @@ class ObserversHandler extends HandlerBase implements HasBaseFile
         parent::copyBaseFiles();
 
         $this->registerObservers();
-        
+
+        $this->registerObserverProviderOnConfig();
+
         return $this;
     }
 
@@ -64,28 +66,50 @@ class ObserversHandler extends HandlerBase implements HasBaseFile
         $registerStrBreaker = '// TODO';
 
         $observers = [
-            $registerStrBreaker
+            $registerStrBreaker,
         ];
         $uses = [
-            $useStrBreaker
+            $useStrBreaker,
         ];
 
         if($this->config['with_address_model']) {
             $observers[] = '        Address::observe(AddressObserver::class);';
-            $uses[] = 'use '.$this->config['models']['namespace'].'\Address;';
-            $uses[] = 'use '.$this->config['observers']['namespace'].'\AddressObserver;';
+            $uses[] = 'use ' . $this->config['models']['namespace'] . '\Address;';
+            $uses[] = 'use ' . $this->config['observers']['namespace'] . '\AddressObserver;';
         }
 
         if($this->config['with_file_model']) {
             $observers[] = '        File::observe(FileObserver::class);';
-            $uses[] = 'use '.$this->config['models']['namespace'].'\File;';
-            $uses[] = 'use '.$this->config['observers']['namespace'].'\FileObserver;';
+            $uses[] = 'use ' . $this->config['models']['namespace'] . '\File;';
+            $uses[] = 'use ' . $this->config['observers']['namespace'] . '\FileObserver;';
         }
 
         $subStr = str_replace($useStrBreaker, implode(PHP_EOL, $uses), $subStr);
         $subStr = str_replace($registerStrBreaker, implode(PHP_EOL, $observers), $subStr);
-        
+
         file_put_contents($path, $subStr);
+
+
+    }
+
+    private function registerObserverProviderOnConfig()
+    {
+        $path = config_path('app.php');
+        
+        $strConfig = file_get_contents($path);
+        
+        $breaker = '* Package Service Providers...'.PHP_EOL.'         */';
+        
+        $providers = [
+            $breaker,
+        ];
+        
+        if(strpos($strConfig,'App\Providers\ObserversProvider::class' ) === false){
+            $providers[] = '        App\Providers\ObserversProvider::class,';
+
+        }
+        
+        file_put_contents($path, str_replace($breaker, implode(PHP_EOL, $providers), $strConfig));
     }
 
     private function copyProvider()
