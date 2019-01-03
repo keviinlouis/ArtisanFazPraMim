@@ -57,9 +57,9 @@ class DumpModelService extends BaseService
             });
         }
 
-         if ($date = $filters->get('end_date')) {
+        if ($date = $filters->get('date')) {
             $query->where(function (Builder $builder) use ($date) {
-               $builder->where('created_at', '>=', $date);
+               $builder->where('created_at', $date);
             });
         }
 

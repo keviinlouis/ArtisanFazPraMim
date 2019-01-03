@@ -145,15 +145,7 @@ class CrudCommand extends Command
 
         $this->handleBaseFiles();
 
-        try {
-            $this->modelsHandler->runCodeModels();
-            $this->info('Gerado models pelo banco');
-        } catch (\Exception $e) {
-            $this->info('Configuração Base finalizada, execute o comando novamente');
-            return;
-        }
-
-        exec('composer dumpautoload');
+        $this->modelsHandler->runCodeModels();
 
         $this->info('Configurando Guards');
 

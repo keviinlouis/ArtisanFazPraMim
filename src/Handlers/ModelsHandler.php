@@ -9,10 +9,10 @@
 namespace Louisk\ArtisanFazPraMim\Handlers;
 
 
-use Louisk\ArtisanFazPraMim\Interfaces\HasBaseFile;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
+use Louisk\ArtisanFazPraMim\Interfaces\HasBaseFile;
 use Reliese\Coders\Model\Config;
 use Reliese\Coders\Model\Factory;
 use Reliese\Support\Classify;
@@ -83,9 +83,20 @@ class ModelsHandler extends HandlerBase implements HasBaseFile
 
         $factory->on($connection)->map($schema);
 
+        $this->handleBaseAddressAndFile();
+
         exec('php artisan ide-helper:models -W');
 
         return $this;
+    }
+
+    private function handleBaseAddressAndFile()
+    {
+        if($this->config['with_address_model'])
+            copy(__DIR__.'/../BaseFiles/Models/'.self::ADDRESS_FILES, $this->config['models']['path'].'/'.self::ADDRESS_FILES);
+        
+        if($this->config['with_file_model'])
+            copy(__DIR__.'/../BaseFiles/Models/'.self::FILE_FILES, $this->config['models']['path'].'/'.self::FILE_FILES);
     }
 
     private function getCodeModelsStub(): string
@@ -112,7 +123,7 @@ class ModelsHandler extends HandlerBase implements HasBaseFile
 
     private function changeBaseModelToBaseUser($file): void
     {
-        $modelPath = $this->getPath() . '/' . $file .'.php';
+        $modelPath = $this->getPath() . '/' . $file . '.php';
 
         $fileStr = file_get_contents($modelPath);
 
@@ -134,7 +145,7 @@ class ModelsHandler extends HandlerBase implements HasBaseFile
             'provider' => Str::snake($file),
         ];
 
-        if($this->config['with_api']){
+        if($this->config['with_api']) {
             $auth['guards'][Str::snake($file) . '_api'] = [
                 'driver' => 'jwt',
                 'provider' => Str::snake($file),

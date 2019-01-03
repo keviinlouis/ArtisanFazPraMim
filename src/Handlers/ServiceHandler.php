@@ -13,7 +13,7 @@ use Louisk\ArtisanFazPraMim\Interfaces\HasBaseFile;
 use Louisk\ArtisanFazPraMim\Interfaces\HasCustomBody;
 use Louisk\ArtisanFazPraMim\Interfaces\HasStub;
 use Illuminate\Support\Str;
-use Reliese\Coders\Model\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ServiceHandler extends HandlerBase implements HasStub, HasBaseFile, HasCustomBody
 {
