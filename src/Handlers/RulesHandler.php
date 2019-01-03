@@ -11,6 +11,8 @@ namespace Louisk\ArtisanFazPraMim\Handlers;
 
 use Louisk\ArtisanFazPraMim\Interfaces\HasCustomBody;
 use Louisk\ArtisanFazPraMim\Interfaces\HasStub;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class RulesHandler extends HandlerBase implements HasStub, HasCustomBody
 {
@@ -78,7 +80,28 @@ class RulesHandler extends HandlerBase implements HasStub, HasCustomBody
             }else if($field == 'cnpj' && $this->config['lang'] == 'pt_br'){
                 $storeRules[] = '            \'cnpj\' => \'required|cnpj\',';
                 $updateRules[] = '            \'cnpj\' => \'nullable|cnpj\',';
-            }else{
+            }else if(strpos($field, '_id') !== false){
+                $relation = str_replace('_id', '', $field);
+                $relationCamel = Str::camel($relation);
+
+                if(!method_exists($model, $relationCamel)){
+                    continue;
+                }
+
+                if(in_array($relation.'_type', $fillable) !== false){
+                    continue;
+                }
+
+                if(!$model->$relationCamel() instanceof BelongsTo){
+                    continue;
+                }
+                
+                $table = $model->$relationCamel()->getRelated()->getTable();
+                
+                $storeRules[] = '            \''.$field.'\' => \'required|exists:'.$table.',id\',';
+                $updateRules[] = '            \''.$field.'\' => \'nullable|exists:'.$table.',id\',';
+            }
+            else{
                 $storeRules[] = '            \''.$field.'\' => \'required\',';
                 $updateRules[] = '            \''.$field.'\' => \'nullable\',';
             }

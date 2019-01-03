@@ -1,5 +1,5 @@
 <?php
-namespace DumbNamespace;
+namespace DumpNamespace;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\MorphTo;

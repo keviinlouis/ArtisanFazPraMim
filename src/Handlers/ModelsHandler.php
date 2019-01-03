@@ -92,11 +92,14 @@ class ModelsHandler extends HandlerBase implements HasBaseFile
 
     private function handleBaseAddressAndFile()
     {
-        if($this->config['with_address_model'])
-            copy(__DIR__.'/../BaseFiles/Models/'.self::ADDRESS_FILES, $this->config['models']['path'].'/'.self::ADDRESS_FILES);
+        if($this->config['with_address_model']){
+            $this->copyBaseFile(self::ADDRESS_FILES);
+        }
+            
         
-        if($this->config['with_file_model'])
-            copy(__DIR__.'/../BaseFiles/Models/'.self::FILE_FILES, $this->config['models']['path'].'/'.self::FILE_FILES);
+        if($this->config['with_file_model']){
+            $this->copyBaseFile(self::FILE_FILES);       
+        }
     }
 
     private function getCodeModelsStub(): string
