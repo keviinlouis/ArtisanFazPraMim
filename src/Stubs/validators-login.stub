@@ -22,7 +22,7 @@ class DumpModelRules
     {
         return [
             'email' => 'required|string|exists:'.(new DumpModel)->getTable(),
-            'senha' => 'required|string',
+            'password' => 'required|string',
         ];
     }
 
